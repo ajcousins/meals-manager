@@ -1,13 +1,13 @@
-const Item = require("./../models/itemModel");
+const Location = require("../models/locationModel");
 
-exports.getAllItems = async (req, res) => {
+exports.getAllLocations = async (req, res) => {
   try {
-    const items = await Item.find();
+    const locations = await Location.find();
 
     res.status(200).json({
       status: "success",
       data: {
-        items,
+        locations,
       },
     });
   } catch (err) {
@@ -18,13 +18,13 @@ exports.getAllItems = async (req, res) => {
   }
 };
 
-exports.getItem = async (req, res) => {
+exports.getLocation = async (req, res) => {
   try {
-    const item = await Item.findById(req.params.id);
+    const location = await Location.findById(req.params.id);
     res.status(200).json({
       status: "success",
       data: {
-        item,
+        location,
       },
     });
   } catch (err) {
@@ -35,14 +35,14 @@ exports.getItem = async (req, res) => {
   }
 };
 
-exports.createItem = async (req, res) => {
+exports.createLocation = async (req, res) => {
   try {
-    const newItem = await Item.create(req.body);
+    const newLocation = await Location.create(req.body);
 
     res.status(201).json({
       status: "Success",
       data: {
-        item: newItem,
+        location: newLocation,
       },
     });
   } catch (err) {
@@ -53,17 +53,21 @@ exports.createItem = async (req, res) => {
   }
 };
 
-exports.updateItem = async (req, res) => {
+exports.updateLocation = async (req, res) => {
   try {
-    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedLocation = await Location.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     res.status(201).json({
       status: "Success",
       data: {
-        item: updatedItem,
+        location: updatedLocation,
       },
     });
   } catch (err) {
@@ -74,9 +78,9 @@ exports.updateItem = async (req, res) => {
   }
 };
 
-exports.deleteItem = async (req, res) => {
+exports.deleteLocation = async (req, res) => {
   try {
-    await Item.findByIdAndDelete(req.params.id);
+    await Location.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: "Success",
