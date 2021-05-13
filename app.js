@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 
@@ -6,7 +7,13 @@ const locationRouter = require("./routes/locationRouter");
 
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 // MIDDLEWARE
+
+// Serving static files. All static assets to be served from 'public' folder.
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -17,6 +24,10 @@ app.use((req, res, next) => {
 });
 
 // ROUTES
+
+app.get("/", (req, res) => {
+  res.status(200).render("layout");
+});
 app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/locations", locationRouter);
 

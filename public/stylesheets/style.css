@@ -1,0 +1,16 @@
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+  background-color: cornsilk;
+  display: flex;
+}
+.sidebar {
+  background-color: aquamarine;
+  width: 200px;
+}
+.content {
+  background-color: burlywood;
+  flex-grow: 1;
+}

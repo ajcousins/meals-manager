@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1 Meal Manager
+    .container
+
+        .sidebar
+          block sidebar
+            ul(class='sidebar-nav')
+              li
+                a(href='/') Home
+              li
+                a(href='/catalog/books') All Items
+              li
+                a(href='/catalog/authors') All Locations
+              
+        .content
+          block content
+            p Content
+            p Content
+            p Content
+            p Content
+            p Content
