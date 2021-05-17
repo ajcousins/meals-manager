@@ -5,24 +5,37 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect" href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet")
   body
-    h1 Meal Manager
-    .container
+    div.navBar
+      img(src='/svg/meal-planner-logo.svg')
+    //- h1= title
+    div.container
 
-        .sidebar
+        div.sidebar
           block sidebar
-            ul(class='sidebar-nav')
-              li
-                a(href='/') Home
-              li
-                a(href='/catalog/books') All Items
-              li
-                a(href='/catalog/authors') All Locations
+          ul
+            li
+              a(href='/') Overview
+            li
+              a(href='#') Fridge
+            li
+              a(href='#') Freezer
+            li.list-header SORT BY
+            li
+              a(href='#') Eat By Date
+            li
+              a(href='#') Date Added
+            li
+              a(href='#') Portions
+            li.list-header ADD NEW
+            li
+              a(href='#') Item
+            li
+              a(href='#') Location
+          
               
-        .content
+        div.content
           block content
-            p Content
-            p Content
-            p Content
-            p Content
-            p Content
+            

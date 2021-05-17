@@ -4,6 +4,7 @@ const morgan = require("morgan");
 
 const itemRouter = require("./routes/itemRouter");
 const locationRouter = require("./routes/locationRouter");
+const viewRouter = require("./routes/viewRouter");
 
 const app = express();
 
@@ -25,9 +26,10 @@ app.use((req, res, next) => {
 
 // ROUTES
 
-app.get("/", (req, res) => {
-  res.status(200).render("layout");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).render("layout");
+// });
+app.use("/", viewRouter);
 app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/locations", locationRouter);
 
