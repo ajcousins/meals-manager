@@ -8,6 +8,8 @@ router
   .get(viewController.getAllItems)
   .post(viewController.createItem);
 
+// router.route("/location/:id").get(viewController.getItemsByLocation);
+
 router
   .route("/:id")
   .get(viewController.getItem)

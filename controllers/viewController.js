@@ -3,7 +3,7 @@ const Location = require("./../models/locationModel");
 
 exports.getAllItems = async (req, res) => {
   try {
-    const items = await Item.find().populate("location");
+    const items = await Item.find(req.query).populate("location");
     const locations = await Location.find();
 
     res.status(200).render("overview", {
@@ -18,6 +18,29 @@ exports.getAllItems = async (req, res) => {
     });
   }
 };
+
+// exports.getItemsByLocation = async (req, res) => {
+//   try {
+//     console.log("Params", req.params);
+//     // Get locations for sidebar
+//     const locations = await Location.find();
+//     // Get items by location/ id.
+//     const items = await Item.findById(req.params.id);
+
+//     res.status(200).render("location", {
+//       title: "Overview",
+//       locations,
+//       items,
+//     });
+
+//     // console.log(items);
+//   } catch (err) {
+//     res.status(404).json({
+//       status: "fail",
+//       message: err,
+//     });
+//   }
+// };
 
 exports.getItem = async (req, res) => {
   try {
