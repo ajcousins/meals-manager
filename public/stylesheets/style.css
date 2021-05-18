@@ -108,6 +108,7 @@ button:active {
   margin-top: 1em;
   margin-left: 2em;
   border: 3px solid #d15959;
+  box-shadow: -2px 2px #a35a5a;
   width: 90%;
   border-radius: 3px;
   display: flex;
@@ -127,6 +128,7 @@ button:active {
 }
 
 .item-container {
+  box-shadow: -2px 2px #a35a5a;
   border: 1px solid #d15959;
   background-color: #fff8f8;
   width: 360px;

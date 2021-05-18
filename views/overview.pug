@@ -2,10 +2,14 @@ extends layout
 
 block content
 
+    - let index;
+    - let displayTitle;
+    - if (title != "Overview") {index = locations.map((i) => {return i.id}).indexOf(title);displayTitle = locations[index].name} else {displayTitle = "Overview";}
 
     div.location-container
         div.title-container
-            h2.location-title= title
+            //- - const titleKey = title
+            h2.location-title= displayTitle
         each val in items
             div.item-container
                 h3.item-title #{val.name}

@@ -22,18 +22,19 @@ html(lang='en')
               li
                 a(href= val.id_query) #{val.name}
 
-            li.list-header SORT BY
-            li
-              a(href='#') Eat By Date
-            li
-              a(href='#') Date Added
-            li
-              a(href='#') Portions
-            li.list-header ADD NEW
-            li
-              a(href='#') Item
-            li
-              a(href='#') Location
+            if title === "Overview"
+              li.list-header SORT BY
+              li
+                a(href='#') Eat By Date
+              li
+                a(href='#') Date Added
+              li
+                a(href='#') Portions
+              li.list-header ADD NEW
+              li
+                a(href='#') Item
+              li
+                a(href='#') Location
           
               
         div.content

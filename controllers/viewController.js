@@ -6,8 +6,12 @@ exports.getAllItems = async (req, res) => {
     const items = await Item.find(req.query).populate("location");
     const locations = await Location.find();
 
+    const title =
+      req.query.location === undefined ? "Overview" : req.query.location;
+    console.log("Title", title);
+
     res.status(200).render("overview", {
-      title: "Overview",
+      title: title,
       locations,
       items,
     });

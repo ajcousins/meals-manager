@@ -45,6 +45,11 @@ const itemSchema = new mongoose.Schema(
   }
 );
 
+// Virtual for shortened/ display date.
+itemSchema.virtual("date_DAY_DD_MM_YYYY").get(function () {
+  return "short date to be implemented";
+});
+
 // Create new model out of schema defined above:
 const Item = mongoose.model("Item", itemSchema);
 
