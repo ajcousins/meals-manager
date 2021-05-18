@@ -15,6 +15,13 @@ const locationSchema = new mongoose.Schema(
   }
 );
 
+// Virtual for locaton URL
+locationSchema.virtual("url").get(function () {
+  const url = "/" + this._id;
+  console.log(url);
+  return url;
+});
+
 // Create new model out of schema defined above:
 const Location = mongoose.model("Location", locationSchema);
 

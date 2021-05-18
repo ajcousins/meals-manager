@@ -4,9 +4,11 @@ const Location = require("./../models/locationModel");
 exports.getAllItems = async (req, res) => {
   try {
     const items = await Item.find().populate("location");
+    const locations = await Location.find();
 
     res.status(200).render("overview", {
       title: "Overview",
+      locations,
       items,
     });
   } catch (err) {

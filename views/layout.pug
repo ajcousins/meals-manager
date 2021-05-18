@@ -18,10 +18,10 @@ html(lang='en')
           ul
             li
               a(href='/') Overview
-            li
-              a(href='#') Fridge
-            li
-              a(href='#') Freezer
+            each val in locations
+              li
+                a(href= val.url) #{val.name}
+
             li.list-header SORT BY
             li
               a(href='#') Eat By Date
