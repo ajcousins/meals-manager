@@ -24,12 +24,25 @@ html(lang='en')
 
             if title === "Overview"
               li.list-header SORT BY
+              //- li
+              //-   a(href='#') Eat By Date
               li
-                a(href='#') Eat By Date
+                a(href='/?sort=dateAdded') Date Added
+              //- li
+              //-   a(href='#') Portions
+              li.list-header ADD NEW
               li
-                a(href='#') Date Added
+                a(href='#') Item
               li
-                a(href='#') Portions
+                a(href='#') Location
+            else
+              li.list-header SORT BY
+              //- li
+              //-   a(href='#') Eat By Date
+              li
+                a(href=`/?location=${currentLocationId}&sort=dateAdded`) Date Added*
+              //- li
+              //-   a(href='#') Portions
               li.list-header ADD NEW
               li
                 a(href='#') Item

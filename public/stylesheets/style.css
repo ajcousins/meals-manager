@@ -143,6 +143,8 @@ button:active {
 }
 
 .item-table {
+  /* Placeholder */
+  border: none;
 }
 
 .item-table-row {

@@ -29,6 +29,11 @@ locationSchema.virtual("id_query").get(function () {
   return "/?location=" + this._id;
 });
 
+// // Virtual for locaton ID, for query string
+// locationSchema.virtual("id_query").get(function () {
+//   return "/?sort=" + this._id;
+// });
+
 // Create new model out of schema defined above:
 const Location = mongoose.model("Location", locationSchema);
 

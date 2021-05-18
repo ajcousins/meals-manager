@@ -3,15 +3,34 @@ const Location = require("./../models/locationModel");
 
 exports.getAllItems = async (req, res) => {
   try {
-    const items = await Item.find(req.query).populate("location");
-    const locations = await Location.find();
+    console.log("Query object:", req.query);
+    // console.log("Request object", req);
+
+    // Filtering
+    const queryObj = { ...req.query };
+    const excludedFields = ["sort"];
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    console.log(queryObj);
 
     const title =
-      req.query.location === undefined ? "Overview" : req.query.location;
-    console.log("Title", title);
+      queryObj.location === undefined ? "Overview" : queryObj.location;
+
+    // let query = Item.find(req.query).populate("location").sort("-dateAdded");
+    let query = Item.find(queryObj).populate("location");
+
+    // Sorting
+    // Check if there is a sort query.
+    if (req.query.sort) {
+      query = query.sort(req.query.sort);
+    }
+
+    const items = await query;
+    const locations = await Location.find();
 
     res.status(200).render("overview", {
       title: title,
+      currentLocationId: queryObj.location,
       locations,
       items,
     });
@@ -22,29 +41,6 @@ exports.getAllItems = async (req, res) => {
     });
   }
 };
-
-// exports.getItemsByLocation = async (req, res) => {
-//   try {
-//     console.log("Params", req.params);
-//     // Get locations for sidebar
-//     const locations = await Location.find();
-//     // Get items by location/ id.
-//     const items = await Item.findById(req.params.id);
-
-//     res.status(200).render("location", {
-//       title: "Overview",
-//       locations,
-//       items,
-//     });
-
-//     // console.log(items);
-//   } catch (err) {
-//     res.status(404).json({
-//       status: "fail",
-//       message: err,
-//     });
-//   }
-// };
 
 exports.getItem = async (req, res) => {
   try {
