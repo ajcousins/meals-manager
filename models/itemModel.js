@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 // Schema for data
 const itemSchema = new mongoose.Schema(
@@ -46,8 +47,16 @@ const itemSchema = new mongoose.Schema(
 );
 
 // Virtual for shortened/ display date.
-itemSchema.virtual("date_DAY_DD_MM_YYYY").get(function () {
-  return "short date to be implemented";
+itemSchema.virtual("dateAdded_med").get(function () {
+  return this.dateAdded
+    ? DateTime.fromJSDate(this.dateAdded).toLocaleString(DateTime.DATE_MED)
+    : "-";
+});
+
+itemSchema.virtual("eatByDate_med").get(function () {
+  return this.eatByDate
+    ? DateTime.fromJSDate(this.eatByDate).toLocaleString(DateTime.DATE_MED)
+    : "-";
 });
 
 // Create new model out of schema defined above:

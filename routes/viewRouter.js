@@ -8,12 +8,6 @@ router
   .get(viewController.getAllItems)
   .post(viewController.createItem);
 
-// router.route("/location/:id").get(viewController.getItemsByLocation);
-
-router
-  .route("/:id")
-  .get(viewController.getItem)
-  .patch(viewController.updateItem)
-  .delete(viewController.deleteItem);
+router.route("/create").get(viewController.newItemForm);
 
 module.exports = router;

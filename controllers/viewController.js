@@ -42,14 +42,12 @@ exports.getAllItems = async (req, res) => {
   }
 };
 
-exports.getItem = async (req, res) => {
+exports.newItemForm = async (req, res) => {
   try {
-    const item = await Item.findById(req.params.id);
-    res.status(200).json({
-      status: "success",
-      data: {
-        item,
-      },
+    const locations = await Location.find();
+
+    res.status(200).render("create", {
+      locations,
     });
   } catch (err) {
     res.status(404).json({

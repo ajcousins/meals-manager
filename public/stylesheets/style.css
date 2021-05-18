@@ -78,6 +78,10 @@ button:active {
   background-color: #d15959;
 }
 
+.logo {
+  margin-left: 10px;
+}
+
 .container {
   margin: 2em;
   /* background-color: cornsilk; */
@@ -92,7 +96,7 @@ button:active {
   width: 115px;
   border-radius: 3px 3px 57.5px 57.5px;
   border: solid 2px #d15959;
-  box-shadow: -2px 2px #a35a5a;
+  box-shadow: -2px 2px 2px #00000055;
   padding-bottom: 2em;
   /* flex-grow: 1; */
 }
@@ -108,7 +112,7 @@ button:active {
   margin-top: 1em;
   margin-left: 2em;
   border: 3px solid #d15959;
-  box-shadow: -2px 2px #a35a5a;
+  box-shadow: -2px 2px 2px #00000055;
   width: 90%;
   border-radius: 3px;
   display: flex;
@@ -128,7 +132,7 @@ button:active {
 }
 
 .item-container {
-  box-shadow: -2px 2px #a35a5a;
+  box-shadow: -2px 2px 2px #00000055;
   border: 1px solid #d15959;
   background-color: #fff8f8;
   width: 360px;

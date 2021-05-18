@@ -10,6 +10,11 @@ block content
         div.title-container
             //- - const titleKey = title
             h2.location-title= displayTitle
+
+        if items.length === 0
+            h2 Nothing to see here!
+            div.title-container
+        
         each val in items
             div.item-container
                 h3.item-title #{val.name}
@@ -25,14 +30,14 @@ block content
                         p.table-content #{val.meal}
                     div.item-table-row
                         h4.label DATE ADDED:
-                        p.table-content #{val.dateAdded}
+                        p.table-content #{val.dateAdded_med}
                     div.item-table-row
                         h4.label EAT BY:
-                        p.table-content #{val.eatByDate}
+                        p.table-content #{val.eatByDate_med}
                     div.item-table-row
                         h4.label NOTES:
                         p.table-content #{val.notes}
-                button 
+                button.but-main
                     h3 Eat Portion
 
 
