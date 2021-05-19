@@ -39,6 +39,37 @@ li {
   font-weight: 600;
 }
 
+textarea {
+  resize: vertical;
+}
+
+.input-title {
+  margin-bottom: 1em;
+}
+
+.form-title {
+  font-size: 1.3em;
+  font-weight: 700;
+  padding: 0.3em 0.3em;
+}
+
+.form-control {
+  margin: 0;
+  margin: 0em 0 0.8em 0;
+  color: #d15959;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d15959;
+  margin: 0;
+}
+
+.form-control:focus {
+  outline: 1px solid #d15959;
+}
+.form-control::placeholder {
+  color: #ecc3c3;
+}
+
 .but-main {
   position: relative;
   background: transparent;

@@ -2,28 +2,43 @@ extends layout
 
 block content
     div.item-container
-        h3.item-title #
-        div.item-table
-            div.item-table-row
-                h4.label PORTIONS:
-                p.table-content # / #
-            div.item-table-row
-                h4.label LOCATION:
-                p.table-content #
-            div.item-table-row
-                h4.label MEAL:
-                p.table-content #
-            div.item-table-row
-                h4.label DATE ADDED:
-                p.table-content #
-            div.item-table-row
-                h4.label EAT BY:
-                p.table-content #
-            div.item-table-row
-                h4.label NOTES:
-                p.table-content #
-        button.but-main
-            span.but-shadow
-            span.but-edge
-            span.but-front
-                h3 Create Item
+        form(method='POST' action='')
+            .input-title
+                input#form-title.form-control.form-title(name='itemName' type='text' placeholder='Item Name' required='true')
+            div.item-table
+                div.item-table-row
+                    label.label(for="portions") PORTIONS:
+                    .table-content
+                        input.form-control(name="portions" type='number' required='true' min="1" max="20")
+                div.item-table-row
+                    label.label LOCATION:
+                    .table-content
+                        select.form-control(name='location' type='text' required='true')
+                            for val in locations 
+                                option(value=val.name) #{val.name}
+                div.item-table-row
+                    label.label MEAL:
+                    .table-content 
+                        select.form-control(name='meal' type='select' required='true')
+                            option(value="Breakfast") Breakfast
+                            option(value="Lunch") Lunch
+                            option(value="Dinner") Dinner
+                            option(value="Snack") Snack
+                            option(value="Misc") Misc
+                //- div.item-table-row
+                //-     label.label DATE ADDED:
+                //-     .table-content 
+                //-         input.form-control(type='date' required='true')
+                div.item-table-row
+                    label.label EAT BY:
+                    .table-content
+                        input.form-control(name='eatBy' type='date')
+                div.item-table-row
+                    label.label NOTES:
+                    .table-content
+                        textarea.form-control(name='notes' cols="40" rows="5")
+            button.but-main(type='submit')
+                span.but-shadow
+                span.but-edge
+                span.but-front
+                    h3 Create Item

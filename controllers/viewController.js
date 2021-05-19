@@ -1,5 +1,6 @@
 const Item = require("./../models/itemModel");
 const Location = require("./../models/locationModel");
+const { body, validationResult } = require("express-validator");
 
 exports.getAllItems = async (req, res) => {
   try {
@@ -23,6 +24,8 @@ exports.getAllItems = async (req, res) => {
     // Check if there is a sort query.
     if (req.query.sort) {
       query = query.sort(req.query.sort);
+    } else {
+      query = query.sort("-dateAdded");
     }
 
     const items = await query;
@@ -45,9 +48,11 @@ exports.getAllItems = async (req, res) => {
 exports.newItemForm = async (req, res) => {
   try {
     const locations = await Location.find();
+    // const req = req;
 
     res.status(200).render("create", {
       locations,
+      // req,
     });
   } catch (err) {
     res.status(404).json({
@@ -59,17 +64,22 @@ exports.newItemForm = async (req, res) => {
 
 exports.createItem = async (req, res) => {
   try {
-    const newItem = await Item.create(req.body);
-
-    res.status(201).json({
-      status: "Success",
-      data: {
-        item: newItem,
-      },
+    const locations = await Location.find();
+    // const newItem = await Item.create(req.body);
+    const newItem = await Item.create({
+      name: req.body.itemName,
+      startingPortions: req.body.portions,
+      remainingPortions: req.body.portions,
+      location: "609d52b569ef3913b6e82cc9",
+      meal: req.body.meal,
     });
+
+    console.log("req.body:", req.body);
+
+    res.status(200).redirect(301, "/");
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: "create fail",
       message: "Invalid data sent",
     });
   }

@@ -18,6 +18,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(morgan("dev"));
 app.use(express.json());
+// For forms. Add fields to req.body.
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
 app.use((req, res, next) => {
   console.log("Hello from the middleware");
