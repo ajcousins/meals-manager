@@ -238,3 +238,21 @@ label {
   width: 100%;
   /* background-color: crimson; */
 }
+
+.portion-circle-full {
+  display: inline-block;
+  margin-right: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: #d15959;
+}
+
+.portion-circle-empty {
+  display: inline-block;
+  margin-right: 5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  border: 1px solid #d15959;
+}

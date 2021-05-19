@@ -8,7 +8,6 @@ block content
 
     div.location-container
         div.title-container
-            //- - const titleKey = title
             h2.location-title= displayTitle
 
         if items.length === 0
@@ -21,7 +20,15 @@ block content
                 div.item-table
                     div.item-table-row
                         h4.label PORTIONS:
-                        p.table-content #{val.remainingPortions} / #{val.startingPortions}
+                        div.table-content
+                            - let fullCircles = val.remainingPortions 
+                            - let emptyCircles = val.startingPortions - val.remainingPortions
+                            while fullCircles > 0
+                                div.portion-circle-full 
+                                - fullCircles--
+                            while emptyCircles > 0
+                                div.portion-circle-empty
+                                - emptyCircles--
                     div.item-table-row
                         h4.label LOCATION:
                         p.table-content #{val.location.name}
@@ -45,49 +52,3 @@ block content
                         span.but-edge
                         span.but-front
                             h3 Eat Portion
-
-
-
-//-     div.item-container
-//-       h3.item-title Chicken Adobo
-//-       div.item-table
-//-         div.item-table-row
-//-           h4.label PORTIONS:
-//-           p.table-content 4 / 6
-//-         div.item-table-row
-//-           h4.label MEAL:
-//-           p.table-content Dinner 
-//-         div.item-table-row
-//-           h4.label DATE ADDED:
-//-           p.table-content Mon, 17th May 
-//-         div.item-table-row
-//-           h4.label EAT BY:
-//-           p.table-content Wed, 19th May 
-//-         div.item-table-row
-//-           h4.label NOTES:
-//-           p.table-content Need to cook more rice and steam some vegetables.
-//-       button 
-//-         h3 Eat Portion
-
-//-   div.location-container
-//-     h2.location-title Freezer
-//-     div.item-container
-//-       h3.item-title Chicken Adobo
-//-       div.item-table
-//-         div.item-table-row
-//-           h4.label PORTIONS:
-//-           p.table-content 4 / 6
-//-         div.item-table-row
-//-           h4.label MEAL:
-//-           p.table-content Dinner 
-//-         div.item-table-row
-//-           h4.label DATE ADDED:
-//-           p.table-content Mon, 17th May 
-//-         div.item-table-row
-//-           h4.label EAT BY:
-//-           p.table-content Wed, 19th May 
-//-         div.item-table-row
-//-           h4.label NOTES:
-//-           p.table-content Need to cook more rice and steam some vegetables.
-//-       button 
-        //- h3 Eat Portion
