@@ -60,6 +60,7 @@ exports.newItemForm = async (req, res) => {
 };
 
 exports.createItem = async (req, res) => {
+  console.log(body.req);
   try {
     await Item.create({
       name: req.body.itemName,
@@ -68,6 +69,7 @@ exports.createItem = async (req, res) => {
       location: req.body.location,
       meal: req.body.meal,
       eatByDate: req.body.eatBy,
+      notes: req.body.notes,
     });
 
     res.status(200).redirect(301, "/");
@@ -140,6 +142,7 @@ exports.updateItemPost = async (req, res) => {
         meal: req.body.meal,
         location: req.body.location,
         eatByDate: req.body.eatBy,
+        notes: req.body.notes,
       },
       {
         new: true,
