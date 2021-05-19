@@ -15,7 +15,7 @@ block content
                     .table-content
                         select.form-control(name='location' type='text' required='true')
                             for val in locations 
-                                option(value=val.name) #{val.name}
+                                option(value=val.id) #{val.name}
                 div.item-table-row
                     label.label MEAL:
                     .table-content 
