@@ -119,6 +119,42 @@ exports.updateItemGet = async (req, res) => {
   }
 };
 
+exports.updateItemPost = async (req, res) => {
+  try {
+    console.log(req.body);
+    let updatedStartingPortions;
+    let updatedRemainingPortions;
+    if (req.body.portions > req.body.startingPortions) {
+      updatedStartingPortions = req.body.portions;
+      updatedRemainingPortions = req.body.portions;
+    } else {
+      updatedStartingPortions = req.body.startingPortions;
+      updatedRemainingPortions = req.body.portions;
+    }
+    await Item.findByIdAndUpdate(
+      req.body.itemId,
+      {
+        name: req.body.itemName,
+        startingPortions: updatedStartingPortions,
+        remainingPortions: updatedRemainingPortions,
+        meal: req.body.meal,
+        location: req.body.location,
+        eatByDate: req.body.eatBy,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.status(201).redirect(301, "/");
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid data sent",
+    });
+  }
+};
+
 exports.updateItem = async (req, res) => {
   try {
     const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {

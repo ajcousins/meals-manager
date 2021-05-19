@@ -13,6 +13,9 @@ router
 
 router.route("/eatportion").post(viewController.eatPortion);
 
-router.route("/item/:id").get(viewController.updateItemGet);
+router
+  .route("/item/:id")
+  .get(viewController.updateItemGet)
+  .post(viewController.updateItemPost);
 
 module.exports = router;

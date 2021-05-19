@@ -3,6 +3,7 @@ extends layout
 block content
     div.item-container
         form(method='POST' action='')
+            input(name='itemId' type="hidden" value=item.id)
             .input-title
                 input#form-title.form-control.form-title(name='itemName' type='text' placeholder='Item Name' required='true' value=item.name)
             div.item-table
@@ -10,6 +11,7 @@ block content
                     label.label(for="portions") PORTIONS:
                     .table-content
                         input.form-control(name="portions" type='number' required='true' min="1" max="22" value=item.remainingPortions)
+                        input(name="startingPortions" type="hidden" value=item.startingPortions)
                 div.item-table-row
                     label.label LOCATION:
                     .table-content
@@ -36,5 +38,5 @@ block content
                 span.but-shadow
                 span.but-edge
                 span.but-front
-                    h3 Create Item
+                    h3 Update Item
 
