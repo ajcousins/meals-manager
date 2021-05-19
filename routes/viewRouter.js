@@ -23,4 +23,6 @@ router
   .get(viewController.locationCreateGet)
   .post(viewController.locationCreatePost);
 
+router.route("/location/delete/:id").post(viewController.locationDeletePost);
+
 module.exports = router;

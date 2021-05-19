@@ -47,9 +47,12 @@ exports.getAllItems = async (req, res) => {
 
 exports.newItemForm = async (req, res) => {
   try {
+    console.log(req.route.path);
+    const currentRoute = req.route.path;
     const locations = await Location.find();
     res.status(200).render("create", {
       locations,
+      currentRoute,
     });
   } catch (err) {
     res.status(404).json({
@@ -160,10 +163,13 @@ exports.updateItemPost = async (req, res) => {
 
 exports.locationCreateGet = async (req, res) => {
   try {
+    console.log(req.route.path);
+    const currentRoute = req.route.path;
     const locations = await Location.find();
 
     res.status(200).render("locationCreate", {
       locations,
+      currentRoute,
     });
   } catch (err) {
     res.status(400).json({
@@ -179,6 +185,20 @@ exports.locationCreatePost = async (req, res) => {
     await Location.create({
       name: req.body.locationName,
     });
+    res.status(201).redirect(301, "/");
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid data sent",
+    });
+  }
+};
+
+exports.locationDeletePost = async (req, res) => {
+  try {
+    console.log("req.body", req.body);
+    await Location.findByIdAndDelete(req.body.location);
+
     res.status(201).redirect(301, "/");
   } catch (err) {
     res.status(400).json({

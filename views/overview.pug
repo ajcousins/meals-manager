@@ -10,8 +10,16 @@ block content
         div.title-container
             h2.location-title= displayTitle
 
-        if items.length === 0
-            h2 Nothing to see here!
+        if items.length === 0 & title != "Overview"
+            div.form-container(style="text-align: center")
+                h2(style="margin-bottom: 0.5em") Nothing to see here!
+                form(method='POST' action=`/location/delete/${currentLocationId}`)
+                    input(name="location" type="hidden" value=currentLocationId)
+                    button.plain-but(type="submit") (Delete #{displayTitle}?)
+            div.title-container
+        else if items.length === 0
+            div.form-container(style="text-align: center")
+                h2(style="margin-bottom: 0.5em") Nothing to see here!
             div.title-container
         
         each val in items
