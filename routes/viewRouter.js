@@ -11,4 +11,6 @@ router
   .get(viewController.newItemForm)
   .post(viewController.createItem);
 
+router.route("/eatportion").post(viewController.eatPortion);
+
 module.exports = router;

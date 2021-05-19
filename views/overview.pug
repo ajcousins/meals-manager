@@ -37,11 +37,14 @@ block content
                     div.item-table-row
                         h4.label NOTES:
                         p.table-content #{val.notes}
-                button.but-main
-                    span.but-shadow
-                    span.but-edge
-                    span.but-front
-                        h3 Eat Portion
+                form(method='POST' action='/eatportion')
+                    input(type="hidden" name="itemId" value=val.id)
+                    input(type="hidden" name="remainingPortions" value=val.remainingPortions)
+                    button.but-main(type="submit")
+                        span.but-shadow
+                        span.but-edge
+                        span.but-front
+                            h3 Eat Portion
 
 
 

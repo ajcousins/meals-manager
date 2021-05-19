@@ -79,6 +79,29 @@ exports.createItem = async (req, res) => {
   }
 };
 
+exports.eatPortion = async (req, res) => {
+  try {
+    if (req.body.remainingPortions * 1 < 2) {
+      console.log("Delete Item");
+      await Item.findByIdAndDelete(req.body.itemId);
+    } else {
+      const newPortions = req.body.remainingPortions - 1;
+      await Item.findByIdAndUpdate(req.body.itemId, {
+        remainingPortions: newPortions,
+      });
+    }
+
+    console.log(req.body);
+
+    res.status(201).redirect(301, "back");
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "Invalid data sent",
+    });
+  }
+};
+
 exports.updateItem = async (req, res) => {
   try {
     const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
