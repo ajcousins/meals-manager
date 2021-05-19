@@ -102,6 +102,23 @@ exports.eatPortion = async (req, res) => {
   }
 };
 
+exports.updateItemGet = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const locations = await Location.find();
+    const item = await Item.findById(req.params.id);
+    res.status(200).render("updateItem", {
+      locations,
+      item,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 exports.updateItem = async (req, res) => {
   try {
     const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {

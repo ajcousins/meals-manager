@@ -59,6 +59,19 @@ itemSchema.virtual("eatByDate_med").get(function () {
     : "-";
 });
 
+// Correct formatting for html date input.
+itemSchema.virtual("dateAdded_htmlForm").get(function () {
+  return this.dateAdded
+    ? DateTime.fromJSDate(this.dateAdded).toISODate()
+    : null;
+});
+
+itemSchema.virtual("eatByDate_htmlForm").get(function () {
+  return this.eatByDate
+    ? DateTime.fromJSDate(this.eatByDate).toISODate()
+    : null;
+});
+
 // Create new model out of schema defined above:
 const Item = mongoose.model("Item", itemSchema);
 
