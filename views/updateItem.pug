@@ -1,41 +1,43 @@
 extends layout 
 
 block content
-    div.item-container
-        form(method='POST' action='')
-            input(name='itemId' type="hidden" value=item.id)
-            .input-title
-                input#form-title.form-control.form-title(name='itemName' type='text' placeholder='Item Name' required='true' value=item.name)
-            div.item-table
-                div.item-table-row
-                    label.label(for="portions") PORTIONS:
-                    .table-content
-                        input.form-control(name="portions" type='number' required='true' min="1" max="22" value=item.remainingPortions)
-                        input(name="startingPortions" type="hidden" value=item.startingPortions)
-                div.item-table-row
-                    label.label LOCATION:
-                    .table-content
-                        select.form-control(name='location' type='text' required='true')
-                            for val in locations 
-                                option(value=val.id selected=(val.id == item.location ? "Selected" : null) ) #{val.name}
-                            
-                div.item-table-row
-                    label.label MEAL:
-                    .table-content 
-                        select.form-control(name='meal' type='select' required='true')
-                            for meal in ["Breakfast", "Lunch", "Dinner", "Snack", "Misc"]
-                                option(value=meal selected=(meal === item.meal ? "Selected" : null)) #{meal}
-  
-                div.item-table-row
-                    label.label EAT BY:
-                    .table-content
-                        input.form-control(name='eatBy' type='date' value=item.eatByDate_htmlForm)
-                div.item-table-row
-                    label.label NOTES:
-                    .table-content
-                        textarea.form-control(name='notes' cols="40" rows="5") #{item.notes}
-            button.but-main(type='submit')
-                span.but-shadow
-                span.but-edge
-                span.but-front
-                    h3 Update Item
+    div.form-container
+        h2.form-heading Update Item
+        div.item-container
+            form(method='POST' action='')
+                input(name='itemId' type="hidden" value=item.id)
+                .input-title
+                    input#form-title.form-control.form-title(name='itemName' type='text' placeholder='Item Name' required='true' value=item.name)
+                div.item-table
+                    div.item-table-row
+                        label.label(for="portions") PORTIONS:
+                        .table-content
+                            input.form-control(name="portions" type='number' required='true' min="1" max="22" value=item.remainingPortions)
+                            input(name="startingPortions" type="hidden" value=item.startingPortions)
+                    div.item-table-row
+                        label.label LOCATION:
+                        .table-content
+                            select.form-control(name='location' type='text' required='true')
+                                for val in locations 
+                                    option(value=val.id selected=(val.id == item.location ? "Selected" : null) ) #{val.name}
+                                
+                    div.item-table-row
+                        label.label MEAL:
+                        .table-content 
+                            select.form-control(name='meal' type='select' required='true')
+                                for meal in ["Breakfast", "Lunch", "Dinner", "Snack", "Misc"]
+                                    option(value=meal selected=(meal === item.meal ? "Selected" : null)) #{meal}
+    
+                    div.item-table-row
+                        label.label EAT BY:
+                        .table-content
+                            input.form-control(name='eatBy' type='date' value=item.eatByDate_htmlForm)
+                    div.item-table-row
+                        label.label NOTES:
+                        .table-content
+                            textarea.form-control(name='notes' cols="40" rows="5") #{item.notes}
+                button.but-main(type='submit')
+                    span.but-shadow
+                    span.but-edge
+                    span.but-front
+                        h3 Update Item
