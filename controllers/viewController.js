@@ -158,6 +158,37 @@ exports.updateItemPost = async (req, res) => {
   }
 };
 
+exports.locationCreateGet = async (req, res) => {
+  try {
+    const locations = await Location.find();
+
+    res.status(200).render("locationCreate", {
+      locations,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "create fail",
+      message: "Invalid data sent",
+    });
+  }
+};
+
+exports.locationCreatePost = async (req, res) => {
+  try {
+    console.log(req.body);
+    await Location.create({
+      name: req.body.locationName,
+    });
+    res.status(201).redirect(301, "/");
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid data sent",
+    });
+  }
+};
+
+/*
 exports.updateItem = async (req, res) => {
   try {
     const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
@@ -194,3 +225,6 @@ exports.deleteItem = async (req, res) => {
     });
   }
 };
+
+
+*/

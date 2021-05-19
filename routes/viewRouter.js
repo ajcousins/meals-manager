@@ -18,4 +18,9 @@ router
   .get(viewController.updateItemGet)
   .post(viewController.updateItemPost);
 
+router
+  .route("/location/new")
+  .get(viewController.locationCreateGet)
+  .post(viewController.locationCreatePost);
+
 module.exports = router;

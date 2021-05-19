@@ -1,0 +1,13 @@
+extends layout 
+
+block content
+    form(method='POST' action='')
+        div.form-container
+            h2.form-heading Create New Location
+            div.input-title
+                input.form-control.form-location(name='locationName' type='text' placeholder='New Location Name' required='true')
+            button.but-main.but-location-form(type='submit')
+                span.but-shadow
+                span.but-edge
+                span.but-front
+                    h3 Create Location

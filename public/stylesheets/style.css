@@ -48,6 +48,10 @@ label {
   font-weight: 500;
 }
 
+form {
+  width: 100%;
+}
+
 .input-title {
   margin-bottom: 1em;
 }
@@ -271,7 +275,23 @@ label {
 .form-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  /* align-items: flex-end; */
+  /* align-content: flex-end; */
 }
 .form-heading {
   margin-top: 0;
+}
+
+.form-location {
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 0.6em 0.3em;
+  width: 100%;
+}
+
+.but-location-form {
+  width: 200px;
+  margin-left: auto;
+  /* margin-right: 0px; */
 }
