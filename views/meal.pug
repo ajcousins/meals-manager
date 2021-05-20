@@ -11,11 +11,18 @@ block content
                 h2(style="margin-bottom: 0.5em") Nothing here!
             div.title-container
 
-        
         each val in items
-            div.item-container
+            - let altFill = "";
+            - let altFillLight = "";
+            - let altStroke = "";
+            - let highlightToday = "";
+            - if (val.freshness < 0) {altFill = "expired-fill"; altFillLight = "expired-fill-light"; altStroke = "expired-stroke";}
+            - if (val.freshness < 24 && val.freshness >= 0) {altFill = "today-fill"; altFillLight = "today-fill-light"; altStroke = "today-stroke";}
+            div(class=`item-container ${altStroke}`)
                 div.item-header
                     h3.item-title #{val.name}
+                        if (val.freshness < 0)
+                            span.italic  (Past eat by date)
                     a(href=`/item/${val.id}`)
                         img.pencil(src='/svg/pencil2.svg')
                 div.item-table
@@ -25,10 +32,10 @@ block content
                             - let fullCircles = val.remainingPortions 
                             - let emptyCircles = val.startingPortions - val.remainingPortions
                             while fullCircles > 0
-                                div.portion-circle-full 
+                                div(class=`portion-circle-full ${altFill}`)
                                 - fullCircles--
                             while emptyCircles > 0
-                                div.portion-circle-empty
+                                div(class=`portion-circle-empty ${altStroke}`)
                                 - emptyCircles--
                     div.item-table-row
                         h4.label LOCATION:
@@ -41,7 +48,7 @@ block content
                         p.table-content #{val.dateAdded_med}
                     div.item-table-row
                         h4.label EAT BY:
-                        p.table-content #{val.eatByDate_med}
+                        p(class=`table-content`) #{val.eatByDate_med}
                     div.item-table-row
                         h4.label NOTES:
                         p.table-content #{val.notes}
@@ -50,6 +57,6 @@ block content
                     input(type="hidden" name="remainingPortions" value=val.remainingPortions)
                     button.but-main(type="submit")
                         span.but-shadow
-                        span.but-edge
-                        span.but-front
+                        span(class=`but-edge ${altFill}`)
+                        span(class=`but-front ${altFillLight}`)
                             h3 Eat Portion

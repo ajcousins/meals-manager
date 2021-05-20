@@ -40,7 +40,7 @@ html(lang='en')
                 li.list-header SORT BY
                 li
                   a(href='/?sort=eatByDate') Eat By Date
-                
+                li
                   a(href='/?sort=dateAdded') Date Added
 
               else if currentRoute === "/meal/:meal"
@@ -60,9 +60,9 @@ html(lang='en')
             li.list-header ADD NEW
             if locations.length > 0
               li
-                a(href='/create') Item
+                a(href='/create') + Item
             li
-              a(href='/location/new') Location
+              a(href='/location/new') + Location
           
               
         div.content

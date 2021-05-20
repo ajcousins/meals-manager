@@ -220,6 +220,24 @@ form {
   margin: 0em 0 0.8em 0;
 }
 
+.portion-circle-full {
+  display: inline-block;
+  margin-right: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: #d15959;
+}
+
+.portion-circle-empty {
+  display: inline-block;
+  margin-right: 5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  border: 1px solid #d15959;
+}
+
 .pencil {
   margin-left: auto;
   margin-right: 0;
@@ -254,24 +272,6 @@ form {
   /* background-color: crimson; */
 }
 
-.portion-circle-full {
-  display: inline-block;
-  margin-right: 5px;
-  width: 15px;
-  height: 15px;
-  border-radius: 100%;
-  background-color: #d15959;
-}
-
-.portion-circle-empty {
-  display: inline-block;
-  margin-right: 5px;
-  width: 13px;
-  height: 13px;
-  border-radius: 100%;
-  border: 1px solid #d15959;
-}
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -304,4 +304,46 @@ form {
   /* font-size: 12px; */
   color: #d15959;
   margin-bottom: 1em;
+}
+
+/* .highlight-today {
+  background-color: #d15959;
+  color: #ffffff;
+  width: auto;
+  font-weight: 600;
+} */
+
+/* Expired Items */
+.expired-fill {
+  background-color: #776f6f;
+}
+
+.expired-fill-light {
+  background-color: #9b9494;
+  color: white;
+}
+
+.expired-stroke {
+  color: #776f6f;
+  border-color: #776f6f;
+}
+
+/* Eat Today Items */
+.today-fill {
+  background-color: #32b52d;
+}
+
+.today-fill-light {
+  background-color: #77cf74;
+  color: white;
+}
+
+.today-stroke {
+  color: #32b52d;
+  border-color: #32b52d;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: 400;
 }

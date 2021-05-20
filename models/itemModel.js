@@ -35,6 +35,7 @@ const itemSchema = new mongoose.Schema(
     },
     eatByDate: {
       type: Date,
+      required: [true, "An item must have an eatByDate"],
     },
     notes: {
       type: String,
@@ -70,6 +71,21 @@ itemSchema.virtual("eatByDate_htmlForm").get(function () {
   return this.eatByDate
     ? DateTime.fromJSDate(this.eatByDate).toISODate()
     : null;
+});
+
+// Freshness
+itemSchema.virtual("freshness").get(function () {
+  if (!this.eatByDate) return 800;
+  else {
+    return (
+      Math.floor(
+        (DateTime.fromJSDate(this.eatByDate) - DateTime.local()) /
+          60 /
+          60 /
+          1000
+      ) + 24
+    );
+  }
 });
 
 // Create new model out of schema defined above:
