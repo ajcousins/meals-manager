@@ -11,7 +11,6 @@ html(lang='en')
     div.navBar
       a(href='/')
         img.logo(src='/svg/meal-planner-logo.svg')
-    //- h1= title
     div.container
 
         div.sidebar
@@ -22,24 +21,41 @@ html(lang='en')
             each val in locations
               li
                 a(href= val.id_query) #{val.name}
+            
+            div
+                li.list-header MEALS
+                li
+                  a(href='/meal/breakfast') Breakfast
+                li
+                  a(href='/meal/lunch') Lunch
+                li
+                  a(href='/meal/dinner') Dinner
+                li
+                  a(href='/meal/snack') Snack
+                li
+                  a(href='/meal/misc') Misc
 
             div
               if title === "Overview" && items
                 li.list-header SORT BY
                 li
                   a(href='/?sort=eatByDate') Eat By Date
-                li
+                
                   a(href='/?sort=dateAdded') Date Added
-                //- li
-                //-   a(href='#') Portions
+
+              else if currentRoute === "/meal/:meal"
+                li.list-header SORT BY
+                li
+                  a(href=`/meal/${title}?sort=eatByDate`) Eat By Date
+                li
+                  a(href=`/meal/${title}?sort=dateAdded`) Date Added
+
               else if currentRoute != "/create" && currentRoute != '/location/new' && items
                 li.list-header SORT BY
                 li
                   a(href=`/?location=${currentLocationId}&sort=eatByDate`) Eat By Date
                 li
                   a(href=`/?location=${currentLocationId}&sort=dateAdded`) Date Added
-              //- li
-              //-   a(href='#') Portions
 
             li.list-header ADD NEW
             if locations.length > 0

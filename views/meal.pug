@@ -1,0 +1,55 @@
+extends layout 
+
+block content
+
+    div.location-container
+        div.title-container
+            h2.location-title= title
+
+        if items.length === 0
+            div.form-container(style="text-align: center")
+                h2(style="margin-bottom: 0.5em") Nothing here!
+            div.title-container
+
+        
+        each val in items
+            div.item-container
+                div.item-header
+                    h3.item-title #{val.name}
+                    a(href=`/item/${val.id}`)
+                        img.pencil(src='/svg/pencil2.svg')
+                div.item-table
+                    div.item-table-row
+                        h4.label PORTIONS:
+                        div.table-content
+                            - let fullCircles = val.remainingPortions 
+                            - let emptyCircles = val.startingPortions - val.remainingPortions
+                            while fullCircles > 0
+                                div.portion-circle-full 
+                                - fullCircles--
+                            while emptyCircles > 0
+                                div.portion-circle-empty
+                                - emptyCircles--
+                    div.item-table-row
+                        h4.label LOCATION:
+                        p.table-content #{val.location.name}
+                    div.item-table-row
+                        h4.label MEAL:
+                        p.table-content #{val.meal}
+                    div.item-table-row
+                        h4.label DATE ADDED:
+                        p.table-content #{val.dateAdded_med}
+                    div.item-table-row
+                        h4.label EAT BY:
+                        p.table-content #{val.eatByDate_med}
+                    div.item-table-row
+                        h4.label NOTES:
+                        p.table-content #{val.notes}
+                form(method='POST' action='/eatportion')
+                    input(type="hidden" name="itemId" value=val.id)
+                    input(type="hidden" name="remainingPortions" value=val.remainingPortions)
+                    button.but-main(type="submit")
+                        span.but-shadow
+                        span.but-edge
+                        span.but-front
+                            h3 Eat Portion

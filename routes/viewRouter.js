@@ -23,6 +23,8 @@ router
   .get(viewController.locationCreateGet)
   .post(viewController.locationCreatePost);
 
+router.route("/meal/:meal").get(viewController.getItemsByMeal);
+
 router.route("/location/delete/:id").post(viewController.locationDeletePost);
 
 module.exports = router;

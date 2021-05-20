@@ -1,6 +1,6 @@
 const Item = require("./../models/itemModel");
 const Location = require("./../models/locationModel");
-const { body, validationResult } = require("express-validator");
+// const { body, validationResult } = require("express-validator");
 
 exports.getAllItems = async (req, res) => {
   try {
@@ -45,6 +45,36 @@ exports.getAllItems = async (req, res) => {
   }
 };
 
+exports.getItemsByMeal = async (req, res) => {
+  try {
+    // console.log("route:", req.route.path);
+    console.log(req.query);
+    const currentRoute = req.route.path;
+    let queryString = [...req.params.meal].join("");
+    const title = queryString.charAt(0).toUpperCase() + queryString.slice(1);
+
+    const items = await Item.find({
+      meal: title,
+    }).sort(req.query.sort);
+
+    // const items = await query;
+    const locations = await Location.find();
+
+    res.status(200).render("meal", {
+      status: "works",
+      items,
+      title,
+      locations,
+      currentRoute,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 exports.newItemForm = async (req, res) => {
   try {
     console.log(req.route.path);
@@ -63,7 +93,7 @@ exports.newItemForm = async (req, res) => {
 };
 
 exports.createItem = async (req, res) => {
-  console.log(body.req);
+  // console.log(body.req);
   try {
     await Item.create({
       name: req.body.itemName,
