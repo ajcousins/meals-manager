@@ -24,20 +24,20 @@ html(lang='en')
                 a(href= val.id_query) #{val.name}
 
             div
-              if title === "Overview" && items.length 
+              if title === "Overview" && items
                 li.list-header SORT BY
-                //- li
-                //-   a(href='#') Eat By Date
+                li
+                  a(href='/?sort=eatByDate') Eat By Date
                 li
                   a(href='/?sort=dateAdded') Date Added
                 //- li
                 //-   a(href='#') Portions
-              else if currentRoute != "/create" && currentRoute != '/location/new' && items.length 
+              else if currentRoute != "/create" && currentRoute != '/location/new' && items
                 li.list-header SORT BY
-                //- li
-                //-   a(href='#') Eat By Date
                 li
-                  a(href=`/?location=${currentLocationId}&sort=dateAdded`) Date Added*
+                  a(href=`/?location=${currentLocationId}&sort=eatByDate`) Eat By Date
+                li
+                  a(href=`/?location=${currentLocationId}&sort=dateAdded`) Date Added
               //- li
               //-   a(href='#') Portions
 
