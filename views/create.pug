@@ -3,7 +3,7 @@ extends layout
 block content
     div.form-container
         h2.form-heading Create New Item
-        div.item-container
+        div.item-container.--media
             form(method='POST' action='')
                 .input-title
                     input#form-title.form-control.form-title(name='itemName' type='text' placeholder='Item Name' required='true')
