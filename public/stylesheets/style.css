@@ -79,6 +79,7 @@ button {
 .form-control:focus {
   outline: 1px solid #d15959;
 }
+
 .form-control::placeholder {
   color: #ecc3c3;
 }
@@ -160,6 +161,7 @@ button {
   display: flex;
   align-items: flex-start;
 }
+
 #sidebar {
   position: sticky;
   top: 2em;
@@ -170,6 +172,7 @@ button {
   box-shadow: -2px 2px 2px #00000055;
   padding-bottom: 2em;
 }
+
 .content {
   margin-left: 2em;
   width: 100%;
@@ -335,7 +338,6 @@ button {
 }
 
 /* Hamburger */
-
 #nav-icon3 {
   visibility: hidden;
   width: 26px;

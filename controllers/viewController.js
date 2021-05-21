@@ -1,27 +1,20 @@
 const Item = require("./../models/itemModel");
 const Location = require("./../models/locationModel");
-// const { body, validationResult } = require("express-validator");
 
 exports.getAllItems = async (req, res) => {
   try {
-    console.log("Query object:", req.query);
-    // console.log("Request object", req);
-
     // Filtering
     const queryObj = { ...req.query };
     const excludedFields = ["sort"];
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    console.log(queryObj);
-
     const title =
       queryObj.location === undefined ? "Overview" : queryObj.location;
 
-    // let query = Item.find(req.query).populate("location").sort("-dateAdded");
     let query = Item.find(queryObj).populate("location");
 
     // Sorting
-    // Check if there is a sort query.
+    // Check if there is a sort query. If not, apply default.
     if (req.query.sort) {
       query = query.sort(req.query.sort);
     } else {
@@ -47,8 +40,6 @@ exports.getAllItems = async (req, res) => {
 
 exports.getItemsByMeal = async (req, res) => {
   try {
-    // console.log("route:", req.route.path);
-    console.log(req.query);
     const currentRoute = req.route.path;
     let queryString = [...req.params.meal].join("");
     const title = queryString.charAt(0).toUpperCase() + queryString.slice(1);
@@ -59,7 +50,6 @@ exports.getItemsByMeal = async (req, res) => {
       .sort(req.query.sort)
       .populate("location");
 
-    // const items = await query;
     const locations = await Location.find();
 
     res.status(200).render("meal", {
@@ -79,7 +69,6 @@ exports.getItemsByMeal = async (req, res) => {
 
 exports.newItemForm = async (req, res) => {
   try {
-    console.log(req.route.path);
     const currentRoute = req.route.path;
     const locations = await Location.find();
     res.status(200).render("create", {
@@ -95,7 +84,6 @@ exports.newItemForm = async (req, res) => {
 };
 
 exports.createItem = async (req, res) => {
-  // console.log(body.req);
   try {
     await Item.create({
       name: req.body.itemName,
@@ -119,7 +107,6 @@ exports.createItem = async (req, res) => {
 exports.eatPortion = async (req, res) => {
   try {
     if (req.body.remainingPortions * 1 < 2) {
-      console.log("Delete Item");
       await Item.findByIdAndDelete(req.body.itemId);
     } else {
       const newPortions = req.body.remainingPortions - 1;
@@ -127,8 +114,6 @@ exports.eatPortion = async (req, res) => {
         remainingPortions: newPortions,
       });
     }
-
-    console.log(req.body);
 
     res.status(201).redirect(301, "back");
   } catch (err) {
@@ -141,7 +126,6 @@ exports.eatPortion = async (req, res) => {
 
 exports.updateItemGet = async (req, res) => {
   try {
-    console.log(req.params.id);
     const locations = await Location.find();
     const item = await Item.findById(req.params.id);
     res.status(200).render("updateItem", {
@@ -158,9 +142,10 @@ exports.updateItemGet = async (req, res) => {
 
 exports.updateItemPost = async (req, res) => {
   try {
-    console.log(req.body);
     let updatedStartingPortions;
     let updatedRemainingPortions;
+    // Check if new starting portions is more than original starting portions.
+    // If so, adjust starting portions. If not, only adjust remaining portions.
     if (req.body.portions > req.body.startingPortions) {
       updatedStartingPortions = req.body.portions;
       updatedRemainingPortions = req.body.portions;
@@ -195,7 +180,6 @@ exports.updateItemPost = async (req, res) => {
 
 exports.locationCreateGet = async (req, res) => {
   try {
-    console.log(req.route.path);
     const currentRoute = req.route.path;
     const locations = await Location.find();
 
@@ -213,7 +197,6 @@ exports.locationCreateGet = async (req, res) => {
 
 exports.locationCreatePost = async (req, res) => {
   try {
-    console.log(req.body);
     await Location.create({
       name: req.body.locationName,
     });
@@ -228,7 +211,6 @@ exports.locationCreatePost = async (req, res) => {
 
 exports.locationDeletePost = async (req, res) => {
   try {
-    console.log("req.body", req.body);
     await Location.findByIdAndDelete(req.body.location);
 
     res.status(201).redirect(301, "/");
@@ -239,44 +221,3 @@ exports.locationDeletePost = async (req, res) => {
     });
   }
 };
-
-/*
-exports.updateItem = async (req, res) => {
-  try {
-    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    res.status(201).json({
-      status: "Success",
-      data: {
-        item: updatedItem,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data sent",
-    });
-  }
-};
-
-exports.deleteItem = async (req, res) => {
-  try {
-    await Item.findByIdAndDelete(req.params.id);
-
-    res.status(204).json({
-      status: "Success",
-      data: null,
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data sent",
-    });
-  }
-};
-
-
-*/

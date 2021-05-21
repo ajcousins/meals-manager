@@ -75,8 +75,10 @@ itemSchema.virtual("eatByDate_htmlForm").get(function () {
 
 // Freshness
 itemSchema.virtual("freshness").get(function () {
-  if (!this.eatByDate) return 800;
+  // Return 24 hours as default so that item doesn't appear as 'Eat Today'.
+  if (!this.eatByDate) return 24;
   else {
+    // Convert difference in milliseconds to hours.
     return (
       Math.floor(
         (DateTime.fromJSDate(this.eatByDate) - DateTime.local()) /
