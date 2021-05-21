@@ -25,7 +25,7 @@ exports.getAllItems = async (req, res) => {
     if (req.query.sort) {
       query = query.sort(req.query.sort);
     } else {
-      query = query.sort("-dateAdded");
+      query = query.sort("eatByDate");
     }
 
     const items = await query;
@@ -55,7 +55,9 @@ exports.getItemsByMeal = async (req, res) => {
 
     const items = await Item.find({
       meal: title,
-    }).sort(req.query.sort);
+    })
+      .sort(req.query.sort)
+      .populate("location");
 
     // const items = await query;
     const locations = await Location.find();
