@@ -7,7 +7,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "devstart": "nodemon server.js",
+    "serverstart": "DEBUG=meals-manager:* npm run devstart"
   },
   "author": "Alvin Cousins",
   "license": "ISC",
