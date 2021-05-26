@@ -1,0 +1,19 @@
+extends layout-reduced
+
+block content
+    form(method='POST' action='')
+        div.form-container.form-container--admin
+            h2.form-heading Register
+            
+            if errorMessage
+                p.error-message= errorMessage
+
+            div.input-title
+                input.form-control.admin__input(name='username' type='text' placeholder='Username' required='true')
+                input.form-control.admin__input(name='password' type='password'  placeholder='Password' required='true')
+                input.form-control.admin__input(name='confirm' type='password'  placeholder='Confirm Password' required='true')
+            button.but-main.but-location-form(type='submit')
+                span.but-shadow
+                span.but-edge
+                span.but-front
+                    h3 Register

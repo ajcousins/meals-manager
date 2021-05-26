@@ -12,6 +12,19 @@ html(lang='en')
     div.navBar
       a(href='/')
         img.logo(src='/svg/meal-planner-logo.svg')
+      
+      if currentUser
+        div.admin
+          span.--bold= currentUser.username
+          span.admin__text &nbsp; | &nbsp;
+          a.admin__link(href='/logout') Sign out
+
+      else 
+        div.admin
+          a.admin__link(href='/login') Sign In 
+          span.admin__text &nbsp; | &nbsp;
+          a.admin__link(href='/register') Register
+
       div#nav-icon3 
         span 
         span 

@@ -1,0 +1,18 @@
+extends layout-reduced
+
+block content
+    form(method='POST' action='')
+        div.form-container.form-container--admin
+            h2.form-heading Log In
+            
+            if errorMessage
+                p.error-message= errorMessage
+
+            div.input-title
+                input.form-control.admin__input(name='username' type='text' placeholder='Username' required='true')
+                input.form-control.admin__input(name='password' type='password'  placeholder='Password' required='true')
+            button.but-main.but-location-form(type='submit')
+                span.but-shadow
+                span.but-edge
+                span.but-front
+                    h3 Log In

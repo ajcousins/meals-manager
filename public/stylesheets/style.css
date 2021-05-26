@@ -339,19 +339,15 @@ button {
 
 /* Hamburger */
 #nav-icon3 {
+  position: absolute;
   visibility: hidden;
   width: 26px;
   height: 26px;
-  position: relative;
   margin: 0 20px 0 auto;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
   cursor: pointer;
 }
 
@@ -368,10 +364,6 @@ button {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.25s ease-in-out;
-  -moz-transition: 0.25s ease-in-out;
-  -o-transition: 0.25s ease-in-out;
-  transition: 0.25s ease-in-out;
 }
 
 #nav-icon3 span:nth-child(1) {
@@ -413,15 +405,68 @@ button {
   left: 50%;
 }
 
+.admin {
+  margin-left: auto;
+  margin-right: 2em;
+  color: white;
+}
+
+.admin a {
+  color: white;
+}
+
+.form-container--admin {
+  margin: auto;
+  width: 300px;
+}
+
+.admin__input {
+  font-size: 1.2em;
+  font-weight: 500;
+  padding: 0.6em 0.3em;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.error-message {
+  margin: 0;
+  margin-bottom: 1em;
+  color: #f04646;
+}
+
+.--bold {
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 600px) {
   #nav-icon3 {
+    position: relative;
+
     visibility: visible;
+  }
+
+  #nav-icon3 {
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+  }
+
+  #nav-icon3 span {
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
   }
 
   .logo {
     margin-left: 10px;
     width: 50%;
     min-width: 220px;
+  }
+
+  .admin {
+    margin-right: 1em;
   }
 
   #sidebar {
@@ -468,6 +513,10 @@ button {
     border: 1px solid #d15959;
     margin: 0;
     font-size: 1.8em;
+  }
+
+  .admin__input {
+    margin-bottom: 1em;
   }
 
   .--media {

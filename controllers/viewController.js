@@ -1,5 +1,9 @@
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const Item = require("./../models/itemModel");
 const Location = require("./../models/locationModel");
+const User = require("./../models/userModel");
 
 exports.getAllItems = async (req, res) => {
   try {
@@ -221,3 +225,93 @@ exports.locationDeletePost = async (req, res) => {
     });
   }
 };
+
+exports.registerUser = (req, res) => {
+  let errorMessage;
+  if (req.query.e === "01") errorMessage = "Please enter a username.";
+  if (req.query.e === "02") errorMessage = "Please enter a password.";
+  if (req.query.e === "03")
+    errorMessage = "Password confirmation does not match.";
+  if (req.query.e === "04")
+    errorMessage = "Username already exists. Try signing in?";
+
+  res.status(200).render("register", { errorMessage });
+};
+
+exports.registerUserPost = async (req, res) => {
+  // No username
+  if (!req.body.username) res.redirect("/register?e=01");
+  // No password
+  else if (!req.body.password) res.redirect("/register?e=02");
+  // Password and confirmation do not match
+  else if (req.body.password != req.body.confirm)
+    res.redirect("/register?e=03");
+  else {
+    await User.findOne({ username: req.body.username }, (err, user) => {
+      // Does username already exist?
+      if (user) res.redirect("/register?e=04");
+      // If not, hash password, save user to database and redirect to login.
+      else {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+          if (err) {
+            return next(err);
+          }
+          new User({
+            username: req.body.username,
+            password: hashedPassword,
+          }).save((err) => {
+            if (err) {
+              return next(err);
+            }
+            res.redirect("/login");
+          });
+        });
+      }
+    });
+  }
+};
+
+exports.getLogIn = (req, res) => {
+  res.status(200).render("login");
+};
+
+exports.postLogIn = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+});
+
+exports.logOut = (req, res) => {
+  req.logout();
+  res.redirect("/");
+};
+
+// Passport Functions
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "Incorrect password" });
+        }
+      });
+    });
+  })
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});

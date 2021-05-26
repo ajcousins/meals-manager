@@ -26,4 +26,16 @@ router.route("/meal/:meal").get(viewController.getItemsByMeal);
 
 router.route("/location/delete/:id").post(viewController.locationDeletePost);
 
+router
+  .route("/register")
+  .get(viewController.registerUser)
+  .post(viewController.registerUserPost);
+
+router
+  .route("/login")
+  .get(viewController.getLogIn)
+  .post(viewController.postLogIn);
+
+router.route("/logout").get(viewController.logOut);
+
 module.exports = router;
