@@ -97,6 +97,7 @@ exports.createItem = async (req, res) => {
       meal: req.body.meal,
       eatByDate: req.body.eatBy,
       notes: req.body.notes,
+      user: req.body.userId,
     });
 
     res.status(200).redirect(301, "/");
@@ -203,6 +204,7 @@ exports.locationCreatePost = async (req, res) => {
   try {
     await Location.create({
       name: req.body.locationName,
+      user: req.body.userId,
     });
     res.status(201).redirect(301, "/");
   } catch (err) {

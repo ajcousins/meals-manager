@@ -8,6 +8,11 @@ const locationSchema = new mongoose.Schema(
       required: [true, "A location must have a name."],
       trim: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },
