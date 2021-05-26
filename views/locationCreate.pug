@@ -6,7 +6,7 @@ block content
             h2.form-heading Create New Location
             div.input-title
                 input.form-control.form-location(name='locationName' type='text' placeholder='New Location Name' required='true')
-                input(name='userId' type='hidden' value=currentUser.id)
+                input(name='userId' type='hidden' value=(currentUser ? currentUser.id : demoUser.id))
             button.but-main.but-location-form(type='submit')
                 span.but-shadow
                 span.but-edge

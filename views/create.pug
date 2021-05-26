@@ -35,7 +35,7 @@ block content
                         label.label NOTES:
                         .table-content
                             textarea.form-control(name='notes' cols="40" rows="5")
-                input(name='userId' type='hidden' value=currentUser.id)
+                input(name='userId' type='hidden' value=(currentUser ? currentUser.id : demoUser.id))
                 button.but-main(type='submit')
                     span.but-shadow
                     span.but-edge

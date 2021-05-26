@@ -7,8 +7,22 @@ const User = require("./../models/userModel");
 
 exports.getAllItems = async (req, res) => {
   try {
+    // Current user
+    console.log(res.locals.currentUser);
+
     // Filtering
     const queryObj = { ...req.query };
+
+    if (res.locals.currentUser === undefined) {
+      // Add demo account to query obj
+      queryObj.user = {
+        _id: "60ae7aca35a25e14184ffc3c",
+      };
+    } else {
+      // Add current user to query obj
+      queryObj.user = res.locals.currentUser;
+    }
+
     const excludedFields = ["sort"];
     excludedFields.forEach((el) => delete queryObj[el]);
 
@@ -25,8 +39,12 @@ exports.getAllItems = async (req, res) => {
       query = query.sort("eatByDate");
     }
 
+    console.log("queryObj:", queryObj);
+
     const items = await query;
-    const locations = await Location.find();
+    const locations = await Location.find({
+      user: queryObj.user._id,
+    });
 
     res.status(200).render("overview", {
       title: title,
@@ -48,13 +66,29 @@ exports.getItemsByMeal = async (req, res) => {
     let queryString = [...req.params.meal].join("");
     const title = queryString.charAt(0).toUpperCase() + queryString.slice(1);
 
-    const items = await Item.find({
+    const queryObj = {
       meal: title,
-    })
+    };
+
+    if (res.locals.currentUser === undefined) {
+      // Add demo account to query obj
+      queryObj.user = {
+        _id: "60ae7aca35a25e14184ffc3c",
+      };
+    } else {
+      // Add current user to query obj
+      queryObj.user = res.locals.currentUser;
+    }
+
+    console.log("queryObj:", queryObj);
+
+    const items = await Item.find(queryObj)
       .sort(req.query.sort)
       .populate("location");
 
-    const locations = await Location.find();
+    const locations = await Location.find({
+      user: queryObj.user._id,
+    });
 
     res.status(200).render("meal", {
       status: "works",
@@ -62,6 +96,7 @@ exports.getItemsByMeal = async (req, res) => {
       title,
       locations,
       currentRoute,
+      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
     });
   } catch (err) {
     res.status(404).json({
@@ -73,11 +108,25 @@ exports.getItemsByMeal = async (req, res) => {
 
 exports.newItemForm = async (req, res) => {
   try {
+    const queryObj = {};
+    if (res.locals.currentUser === undefined) {
+      // Add demo account to query obj
+      queryObj.user = {
+        _id: "60ae7aca35a25e14184ffc3c",
+      };
+    } else {
+      // Add current user to query obj
+      queryObj.user = res.locals.currentUser;
+    }
+
     const currentRoute = req.route.path;
-    const locations = await Location.find();
+    const locations = await Location.find({
+      user: queryObj.user._id,
+    });
     res.status(200).render("create", {
       locations,
       currentRoute,
+      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
     });
   } catch (err) {
     res.status(404).json({
@@ -131,11 +180,23 @@ exports.eatPortion = async (req, res) => {
 
 exports.updateItemGet = async (req, res) => {
   try {
-    const locations = await Location.find();
+    const queryObj = {};
+    if (res.locals.currentUser === undefined) {
+      // Add demo account to query obj
+      queryObj.user = {
+        _id: "60ae7aca35a25e14184ffc3c",
+      };
+    } else {
+      // Add current user to query obj
+      queryObj.user = res.locals.currentUser;
+    }
+
+    const locations = await Location.find({ user: queryObj.user._id });
     const item = await Item.findById(req.params.id);
     res.status(200).render("updateItem", {
       locations,
       item,
+      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
     });
   } catch (err) {
     res.status(404).json({
@@ -185,12 +246,24 @@ exports.updateItemPost = async (req, res) => {
 
 exports.locationCreateGet = async (req, res) => {
   try {
+    const queryObj = {};
+    if (res.locals.currentUser === undefined) {
+      // Add demo account to query obj
+      queryObj.user = {
+        _id: "60ae7aca35a25e14184ffc3c",
+      };
+    } else {
+      // Add current user to query obj
+      queryObj.user = res.locals.currentUser;
+    }
+
     const currentRoute = req.route.path;
-    const locations = await Location.find();
+    const locations = await Location.find({ user: queryObj.user._id });
 
     res.status(200).render("locationCreate", {
       locations,
       currentRoute,
+      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
     });
   } catch (err) {
     res.status(400).json({
