@@ -30,3 +30,14 @@ My own brief was to create something that is able to manage food items in variou
 - The application uses an MVC architecture.
 - Item and location controllers were created to manage API routes, which I was able to use to test access to the database before implementing views.
 - Views are rendered using pug templates.
+- A default/ demo account is accessible to every user before signing up. This is achieved by adding a specific demo user id to the request object, which each view controller then checks for.
+
+```js
+// Adds currentUser variable to res object so that currentUser is available in all views.
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  // Add demo user to res object in case there is no currentUser.
+  res.locals.demoUser = { _id: "60ae7aca35a25e14184ffc3c" };
+  next();
+});
+```
