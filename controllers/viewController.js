@@ -7,21 +7,13 @@ const User = require("./../models/userModel");
 
 exports.getAllItems = async (req, res) => {
   try {
-    // Current user
-    console.log(res.locals.currentUser);
-
     // Filtering
     const queryObj = { ...req.query };
 
-    if (res.locals.currentUser === undefined) {
-      // Add demo account to query obj
-      queryObj.user = {
-        _id: "60ae7aca35a25e14184ffc3c",
-      };
-    } else {
-      // Add current user to query obj
-      queryObj.user = res.locals.currentUser;
-    }
+    // Set queryObj.user to demo/ default if currentUser is undefined.
+    queryObj.user = res.locals.currentUser
+      ? res.locals.currentUser
+      : res.locals.demoUser;
 
     const excludedFields = ["sort"];
     excludedFields.forEach((el) => delete queryObj[el]);
@@ -38,8 +30,6 @@ exports.getAllItems = async (req, res) => {
     } else {
       query = query.sort("eatByDate");
     }
-
-    console.log("queryObj:", queryObj);
 
     const items = await query;
     const locations = await Location.find({
@@ -70,17 +60,10 @@ exports.getItemsByMeal = async (req, res) => {
       meal: title,
     };
 
-    if (res.locals.currentUser === undefined) {
-      // Add demo account to query obj
-      queryObj.user = {
-        _id: "60ae7aca35a25e14184ffc3c",
-      };
-    } else {
-      // Add current user to query obj
-      queryObj.user = res.locals.currentUser;
-    }
-
-    console.log("queryObj:", queryObj);
+    // Set queryObj.user to demo/ default if currentUser is undefined.
+    queryObj.user = res.locals.currentUser
+      ? res.locals.currentUser
+      : res.locals.demoUser;
 
     const items = await Item.find(queryObj)
       .sort(req.query.sort)
@@ -96,7 +79,7 @@ exports.getItemsByMeal = async (req, res) => {
       title,
       locations,
       currentRoute,
-      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
+      demoUser: { id: res.locals.demoUser._id },
     });
   } catch (err) {
     res.status(404).json({
@@ -109,15 +92,10 @@ exports.getItemsByMeal = async (req, res) => {
 exports.newItemForm = async (req, res) => {
   try {
     const queryObj = {};
-    if (res.locals.currentUser === undefined) {
-      // Add demo account to query obj
-      queryObj.user = {
-        _id: "60ae7aca35a25e14184ffc3c",
-      };
-    } else {
-      // Add current user to query obj
-      queryObj.user = res.locals.currentUser;
-    }
+    // Set queryObj.user to demo/ default if currentUser is undefined.
+    queryObj.user = res.locals.currentUser
+      ? res.locals.currentUser
+      : res.locals.demoUser;
 
     const currentRoute = req.route.path;
     const locations = await Location.find({
@@ -126,7 +104,7 @@ exports.newItemForm = async (req, res) => {
     res.status(200).render("create", {
       locations,
       currentRoute,
-      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
+      demoUser: { id: res.locals.demoUser._id },
     });
   } catch (err) {
     res.status(404).json({
@@ -181,22 +159,17 @@ exports.eatPortion = async (req, res) => {
 exports.updateItemGet = async (req, res) => {
   try {
     const queryObj = {};
-    if (res.locals.currentUser === undefined) {
-      // Add demo account to query obj
-      queryObj.user = {
-        _id: "60ae7aca35a25e14184ffc3c",
-      };
-    } else {
-      // Add current user to query obj
-      queryObj.user = res.locals.currentUser;
-    }
+    // Set queryObj.user to demo/ default if currentUser is undefined.
+    queryObj.user = res.locals.currentUser
+      ? res.locals.currentUser
+      : res.locals.demoUser;
 
     const locations = await Location.find({ user: queryObj.user._id });
     const item = await Item.findById(req.params.id);
     res.status(200).render("updateItem", {
       locations,
       item,
-      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
+      demoUser: { id: res.locals.demoUser._id },
     });
   } catch (err) {
     res.status(404).json({
@@ -247,15 +220,10 @@ exports.updateItemPost = async (req, res) => {
 exports.locationCreateGet = async (req, res) => {
   try {
     const queryObj = {};
-    if (res.locals.currentUser === undefined) {
-      // Add demo account to query obj
-      queryObj.user = {
-        _id: "60ae7aca35a25e14184ffc3c",
-      };
-    } else {
-      // Add current user to query obj
-      queryObj.user = res.locals.currentUser;
-    }
+    // Set queryObj.user to demo/ default if currentUser is undefined.
+    queryObj.user = res.locals.currentUser
+      ? res.locals.currentUser
+      : res.locals.demoUser;
 
     const currentRoute = req.route.path;
     const locations = await Location.find({ user: queryObj.user._id });
@@ -263,7 +231,7 @@ exports.locationCreateGet = async (req, res) => {
     res.status(200).render("locationCreate", {
       locations,
       currentRoute,
-      demoUser: { id: "60ae7aca35a25e14184ffc3c" },
+      demoUser: { id: res.locals.demoUser._id },
     });
   } catch (err) {
     res.status(400).json({

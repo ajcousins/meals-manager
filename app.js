@@ -35,6 +35,8 @@ app.use(passport.session());
 // Adds currentUser variable to res object so that currentUser is available in all views.
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
+  // Add demo user to res object in case there is no currentUser.
+  res.locals.demoUser = { _id: "60ae7aca35a25e14184ffc3c" };
   next();
 });
 
