@@ -12,7 +12,12 @@ My own brief was to create something that is able to manage food items in variou
 
 ### Features
 
-Currently the app supports a single user with no authentication. I intend to update this so that it can support multiple users.
+#### Update 27/05/21
+
+- By default, users have shared access to a demo account which can be manipulated when not signed in.
+- Users can register to access an empty account, where they can set up items and locations from scratch.
+
+#### 21/05/21
 
 - The user can create new locations and add food items, with a 'use by date', 'number of portions' and 'notes'.
 - The app colour codes items which should be eaten today in green. Items which have passed this date are coloured grey.
