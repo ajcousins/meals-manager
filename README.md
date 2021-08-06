@@ -4,7 +4,7 @@ Live app can be visited [here](https://powerful-depths-88188.herokuapp.com/).
 
 ### Brief
 
-This app was created as a way to exercise what I had learned about Node, Express, MongoDB/ Mongoose and the back-end in general. I also used it as my submission for the Odin Project Inventory Application project (https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/inventory-application).
+This app was created as a way to exercise what I had learned about Node, Express, MongoDB/ Mongoose and the back-end in general. I also used it as my submission for The Odin Project Inventory Application project (https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/inventory-application).
 
 Whilst this project does not follow the original brief (Odin Project wanted an Inventory management app for an imaginary store), I wanted to create something that could be useful to me as an everyday tool, but was the same in spirit to the original brief, which was to create a basic CRUD application for items grouped into categories.
 
